@@ -1,0 +1,7 @@
+packages:
+  - apps/*
+  - packages/*
+
+# esbuild's install step selects the correct native Vite executable.
+allowBuilds:
+  esbuild: true

@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "include": [
+    "apps/**/*.ts",
+    "apps/**/*.tsx",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "productions/**/*.ts",
+    "productions/**/*.tsx",
+    "tests/**/*.ts",
+    "*.config.ts"
+  ],
+  "compilerOptions": {
+    "types": ["node"]
+  }
+}

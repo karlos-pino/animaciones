@@ -1,0 +1,6 @@
+{
+  "name": "@studio/diagram-components",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.tsx"
+}

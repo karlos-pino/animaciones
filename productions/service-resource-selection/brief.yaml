@@ -1,0 +1,28 @@
+id: service-resource-selection
+objective: Explicar cómo la disponibilidad y el nivel solicitado determinan qué recursos de servicio son elegibles.
+audience: Personas que operan o revisan un flujo de asignación de servicios.
+facts:
+  - id: F1
+    statement: La población sintética contiene 50 recursos, 38 activos y 12 inactivos.
+    source: facts.md
+  - id: F2
+    statement: La disponibilidad excluye a todos los recursos inactivos.
+    source: facts.md
+  - id: F3
+    statement: La solicitud del piloto requiere específicamente el nivel intermedio.
+    source: facts.md
+  - id: F4
+    statement: El nivel se aplica a los 38 activos; 14 básicos y 8 avanzados quedan fuera.
+    source: facts.md
+  - id: F5
+    statement: Los 16 elegibles son activos e intermedios. El territorio se conserva como dato.
+    source: facts.md
+output:
+  aspect_ratio: '16:9'
+  language: es-CO
+  audio: false
+constraints:
+  - El territorio queda fuera de los criterios de elegibilidad.
+  - Coordenadas y divisiones sintéticas sin referentes geográficos reales.
+  - Mantener la identidad y posición de cada recurso durante las exclusiones.
+  - Acompañar el color con forma, barra diagonal, anillo o texto.

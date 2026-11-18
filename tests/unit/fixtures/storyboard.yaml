@@ -1,0 +1,16 @@
+production: guardar-acta
+scenes:
+  - id: guardar
+    teaching_point: Reconocer el estado registrado.
+    facts: [F1]
+    entities: [acta, inspección]
+    initial_state: pendiente
+    action: Guardar el acta.
+    transition: revelar estado
+    final_state: registrada
+    duration_estimate: 4
+    caption: Acta guardada · Inspección registrada
+    checkpoint:
+      id: guardado
+      at: 3
+    assumptions: [Guardado exitoso.]

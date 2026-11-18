@@ -1,0 +1,13 @@
+id: guardar-acta
+objective: Reconocer el cambio de estado al guardar un acta.
+audience: Operador nuevo.
+facts:
+  - id: F1
+    statement: Guardar el acta registra la inspección.
+    source: docs/skill-workflow-example.md
+output:
+  aspect_ratio: '16:9'
+  language: es
+  audio: false
+constraints:
+  - Representar un guardado exitoso.

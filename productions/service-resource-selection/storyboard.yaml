@@ -1,0 +1,64 @@
+production: service-resource-selection
+scenes:
+  - id: population
+    teaching_point: Reconocer la población y la codificación de cada recurso.
+    facts: [F1]
+    entities: [recursos, mapa, leyenda, contador]
+    initial_state: mapa-vacío
+    action: Revelar la población completa y su contador.
+    transition: Entrada por opacidad.
+    final_state: población-visible
+    duration_estimate: 3.5
+    caption: Cada punto representa un recurso.
+    checkpoint: { id: 01-poblacion, at: 1.5 }
+    assumptions: [Los puntos representan posiciones sintéticas.]
+  - id: availability
+    teaching_point: Entender que la disponibilidad es el primer criterio.
+    facts: [F1, F2]
+    entities: [recursos activos, recursos inactivos, contador]
+    initial_state: población-visible
+    action: Marcar y retirar los inactivos. Actualizar el total con los recursos activos.
+    transition: Marcar con diagonal, atenuar y retirar sin mover los supervivientes.
+    final_state: disponibles
+    duration_estimate: 4.5
+    caption: Excluir recursos inactivos.
+    entry_checkpoint: { id: 02-disponibilidad-inicio, at: 1.1 }
+    checkpoint: { id: 03-disponibilidad-cierre, at: 3.1 }
+    assumptions: [Activo equivale a disponible en el piloto.]
+  - id: request
+    teaching_point: Reconocer el nivel exacto solicitado.
+    facts: [F3]
+    entities: [solicitud, recursos disponibles]
+    initial_state: disponibles
+    action: Mostrar el nivel requerido y su rombo.
+    transition: Revelar la solicitud conservando los recursos disponibles.
+    final_state: solicitud-visible
+    duration_estimate: 3.5
+    caption: Se requiere un recurso de nivel intermedio.
+    checkpoint: { id: 04-solicitud, at: 1.4 }
+    assumptions: [La coincidencia de nivel es exacta.]
+  - id: level
+    teaching_point: Aplicar el nivel solamente a los recursos disponibles.
+    facts: [F4]
+    entities: [recursos básicos, recursos intermedios, recursos avanzados, contador]
+    initial_state: solicitud-visible
+    action: Marcar básicos y avanzados, retirarlos y actualizar el total elegible.
+    transition: Marcar con diagonal y atenuar. Destacar los rombos que quedan.
+    final_state: elegibles
+    duration_estimate: 4.5
+    caption: Excluir los niveles básico y avanzado.
+    entry_checkpoint: { id: 05-nivel-inicio, at: 1.1 }
+    checkpoint: { id: 06-nivel-cierre, at: 3.3 }
+    assumptions: [Un nivel avanzado también queda fuera de la solicitud exacta.]
+  - id: result
+    teaching_point: Sintetizar los criterios acumulativos de actividad y nivel.
+    facts: [F5]
+    entities: [recursos elegibles, contador, resumen]
+    initial_state: elegibles
+    action: Mantener visibles los supervivientes y resumir las dos reglas.
+    transition: Estabilizar el mapa y enfatizar la síntesis.
+    final_state: resultado
+    duration_estimate: 4
+    caption: Activo y de nivel intermedio.
+    checkpoint: { id: 07-resultado, at: 2.5 }
+    assumptions: [El flujo posterior de asignación queda fuera del piloto.]
