@@ -1,6 +1,6 @@
 # Bitácora de implementación
 
-## Fase 1 — Diagnóstico y decisiones técnicas · 2026-11-17
+## Fase 1 — Diagnóstico y decisiones técnicas · 2026-11-17 · COMPLETADA
 
 - Archivos: `docs/implementation-log.md` y `docs/technology-decisions.md`.
 - Comandos: `Get-ChildItem -Force`, `rg --files --hidden`, `git status --short --branch`, `git rev-parse --show-toplevel`, `Get-Command`, consultas de versión y metadatos npm por Node.
@@ -25,6 +25,7 @@
 - Evidencia: `dist/evidence/phase-03-skills.json` y [ejercicio](skill-workflow-example.md).
 - Incidencias: la ACL de `.agents` y el estado de Codex impidieron usar el sandbox para las cinco últimas escrituras y el descubrimiento. Se resolvió con la ejecución elevada de las operaciones acotadas.
 - Referencias: [OpenAI AGENTS.md](https://learn.chatgpt.com/docs/agent-configuration/agents-md) y [skills](https://learn.chatgpt.com/docs/build-skills).
+- Comprobación adicional al cierre: `codex debug prompt-input` encontró las instrucciones raíz desde ambos directorios, las instrucciones de la app desde su directorio y las skills desde la raíz. Evidencia resumida en `dist/evidence/phase-03-agent-instructions.json`.
 
 ## Fase 4 — Lenguaje visual y contratos · 2026-11-17 · COMPLETADA
 
@@ -65,3 +66,16 @@
 - Resultado de ffprobe: preview 960×540, 30 FPS, 600 cuadros, 186.941 bytes. Master 1920×1080, 60 FPS, 1.200 cuadros, 810.122 bytes. Ambos H.264 yuv420p, 20 s y un stream de video. Se decodificó todo el master y se examinó una imagen de la segunda exclusión extraída del preview, además del póster PNG.
 - Evidencia: `dist/service-resource-selection/manifest.json`, `dist/evidence/phase-08-decoded-preview.png` y entregables en la carpeta de distribución. La primera generación del manifiesto tenía `commit: null` porque el repositorio aún carecía de HEAD.
 - Decisión: el adaptador entrega el PNG de Motion Canvas a FFmpeg por stdin. El manifiesto registra herramientas, fuentes y sus hashes, licencias de assets y resultados de ffprobe. Se conserva fuente y snapshots en Git. Los medios generados quedan en `dist/`.
+
+## Fase 9 — CI y documentación operativa · 2026-11-17 · COMPLETADA
+
+- **Archivos** Workflows `quality.yml` y `checkpoints.yml`, guía de producción, README, backlog de ADR, reglas de formato y texto plano.
+- **Comandos** `actionlint -no-color` para ambos workflows. En `git clone --local --no-hardlinks` de `55abe99`, instalación con lockfile, formato, lint, typecheck, Vitest, Playwright, checkpoints, render de preview y master, ffprobe para ambos y manifiesto.
+- **Resultado** actionlint 1.7.12 aprobó ambos archivos. La copia limpia reinstaló 223 paquetes con integridad de lockfile, aprobó 17 pruebas de Vitest y dos de Playwright, reprodujo ambos videos y mantuvo limpio el árbol Git. Los 12 archivos de distribución coincidieron byte a byte por SHA-256. La revisión que documenta este resultado solo actualiza documentación.
+- **Evidencias** `dist/evidence/phase-09-actionlint.txt`, `dist/evidence/phase-09-clean-pipeline.txt` y el manifiesto final de distribución.
+- **Alcance de CI** Las pruebas se ejecutaron en Windows local con Chromium fijado y medios portables. La validación estática cubrió los archivos para Ubuntu 24.04 y Windows Server 2025. La ejecución alojada de GitHub Actions queda pendiente porque el repositorio local carece de un remoto.
+- **Referencias** [Sintaxis de GitHub Actions](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax), [imágenes de runners](https://github.com/actions/runner-images/blob/main/README.md) y [actionlint](https://github.com/rhysd/actionlint/releases/tag/v1.7.12).
+
+## Fase 10 — Backlog
+
+Manim, Three.js/React Three Fiber, Blender, Remotion, Rive y catálogo web quedan pendientes de un caso de uso y un ADR, según el plan.
